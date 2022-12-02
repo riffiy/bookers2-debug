@@ -22,7 +22,7 @@ before_action :authenticate_user!
     @newbook = Book.new
     @book = Book.find(params[:id])
     @post_comment = PostComment.new
-    @favorite = Favorite.new
+    @post_comment = PostComment.all
     @user = @book.user
     @books = Book.where(user_id: @user.id)
     
