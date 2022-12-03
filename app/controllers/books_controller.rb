@@ -21,11 +21,9 @@ before_action :authenticate_user!
   def show
     @newbook = Book.new
     @book = Book.find(params[:id])
-    @post_comment = PostComment.new
-    @post_comment = PostComment.all
+    @book_comment = BookComment.new
     @user = @book.user
     @books = Book.where(user_id: @user.id)
-    
   end
 
   def edit
