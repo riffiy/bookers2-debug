@@ -1,13 +1,15 @@
-
-
-<tbody>
+<% if @users.exists? %>
   <% @users.each do |user| %>
-    <tr>
-      <td><%= image_tag user.get_profile_image(50,50) %></td>
-      <td><%= user.name %></td>
-      <td>フォロー数：<%= user.followings.count %></td>
-      <td>フォロワー数：<%= user.followers.count %></td>
-      <td><%= link_to "show", user_path(user.id) %> </td>
-    </tr>
+    <tbody>
+        <tr>
+          <td><%= image_tag user.get_profile_image(50,50) %></td>
+          <td><%= user.name %></td>
+          <td>フォロー数：<%= user.followings.count %></td>
+          <td>フォロワー数：<%= user.followers.count %></td>
+          <td><%= link_to "show", user_path(user.id) %> </td>
+        </tr>
+    </tbody>
   <% end %>
-</tbody>
+  <% else %>
+    <p>ユーザーはいません</p>
+<% end %>
