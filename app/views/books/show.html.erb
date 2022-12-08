@@ -21,45 +21,22 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
-            <td>
-            <% if @book.favorited?(current_user) %>
-              <p>
-                <%= link_to book_favorites_path(@book), method: :delete do %>
-                ♥<%= @book.favorites.count %> 
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-                <%= link_to book_favorites_path(@book), method: :post do %>
-                ♡<%= @book.favorites.count %> 
-                <% end %>
-              </p>
-            <% end %>
+            <td id="favorite_buttons_<%= book.id %>">
+              <%= render "favorites/favorites", book: book %>
             </td>
-          <td>コメント数：<%= @book.book_comments.count %></td>
+          <td><%= render "book_comments/comments_count", book: book %></td>
         </tr>
       </table>
       <% @book.book_comments.each do |book_comment| %>
-       <p><%= image_tag book_comment.user.get_profile_image(50,50) %></p>
-        <%= book_comment.user.name %>
-        <%= book_comment.comment %>
+        <%= render "book_comments/comments_list", book: book %>
         <% if book_comment.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
           <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
         <% end %>
       <% end %>
       <div>
-          <p　class='col-md-8 offset-md-1'>
-            <%= form_with model: [@book, @book_comment], url: book_book_comments_path(@book) do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          </p>
-        </div>
-        <div>
-          <p>
-            <%= f.submit "送信" %>
-            <% end %>
-          </p>
-        </div>
+         <%= render "book_comments/comments_form", book: book %>    
+      </div>
     </div>
   </div>
 </div>

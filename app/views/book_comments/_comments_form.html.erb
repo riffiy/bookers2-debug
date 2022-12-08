@@ -1,0 +1,10 @@
+<p　class='col-md-8 offset-md-1'>
+  <%= form_with model: [book, book_comment], url: book_book_comments_path(book), local: false do |f| %>
+  <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+</p>
+</div>
+<div>
+<p>
+  <%= f.submit "送信" %>
+  <% end %>
+</p>
