@@ -25,6 +25,7 @@ before_action :authenticate_user!
     @books = Book.where(user_id: @user.id)
     @book_one=Book.find(params[:id])
     @book_comment=BookComment.new
+    
   end
 
   def edit
