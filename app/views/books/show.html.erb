@@ -21,21 +21,23 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
-            <td id="favorite_buttons_<%= book.id %>">
-              <%= render "favorites/favorites", book: book %>
+            <td id="favorite_buttons_<%= @book.id %>">
+              <%= render "favorites/favorites", book: @book %>
             </td>
-          <td><%= render "book_comments/comments_count", book: book %></td>
+          <td id="comment_count"><%= render "book_comments/comments_count", book: @book %></td>
         </tr>
       </table>
       <% @book.book_comments.each do |book_comment| %>
-        <%= render "book_comments/comments_list", book: book %>
+        <td id="comment_list">
+        <%= render "book_comments/comments_list", book_comment: @book_comment, book_one: @book_one %>
+        </td>
         <% if book_comment.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
           <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
         <% end %>
       <% end %>
-      <div>
-         <%= render "book_comments/comments_form", book: book %>    
+      <div id="comment_form">
+         <%= render "book_comments/comments_form", book: @book %>    
       </div>
     </div>
   </div>
