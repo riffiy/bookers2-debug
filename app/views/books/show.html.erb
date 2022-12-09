@@ -27,17 +27,12 @@
           <td id="comment_count"><%= render "book_comments/comments_count", book: @book %></td>
         </tr>
       </table>
-      <% @book.book_comments.each do |book_comment| %>
-        <td id="comment_list">
-        <%= render "book_comments/comments_list", book_comment: @book_comment, book_one: @book_one %>
-        </td>
-        <% if book_comment.user == current_user %>
-          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
-          <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
-        <% end %>
-      <% end %>
+        <div id="comment_list">
+        <%= render "book_comments/comments_list", book_comment: @book_comment, book: @book, book_one: @book_one %>
+        </div>
+       
       <div id="comment_form">
-         <%= render "book_comments/comments_form", book: @book %>    
+         <%= render "book_comments/comments_form", book: @book, book_comment: @book_comment %>    
       </div>
     </div>
   </div>
